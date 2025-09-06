@@ -1,0 +1,21 @@
+We can override values by 3 ways:
+1) CLI
+    bash
+    ----
+    terraform apply -var="instance_type"="t2.micro"
+2) .tfvars File
+
+    hcl  (example.tfvars)
+    ---
+    aws_region = "ap-south-2"
+    instance_type = "t3.micro"
+
+    bash
+    -----
+    terraform apply -var-file="example.tfvars"
+3) Environment variables
+    run export before apply command
+    bash
+    ----
+    export TF_VAR_instance_type="t3.micro"
+    
