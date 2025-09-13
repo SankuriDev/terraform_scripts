@@ -2,7 +2,7 @@ resource "aws_instance" "test-instance1" {
   ami = var.aws_ami
   availability_zone = "ap-south-1a"
   instance_type = var.instance_type
-  key_name = "k8s_test"
+  key_name = var.aws_key_name
   subnet_id = aws_subnet.test-public-subnet1.id 
   vpc_security_group_ids = ["${aws_security_group.test-SG.id}"]
   associate_public_ip_address = true
@@ -15,6 +15,10 @@ resource "aws_instance" "test-instance1" {
               sudo apt install -y nginx
               sudo systemctl start nginx
               sudo systemctl enable nginx
+
+              # Create custom index page
+              echo "<h1>Hello from NGINX-1 🚀</h1>" > /usr/share/nginx/html/index.html
+
               EOF
   root_block_device {
     volume_size = "10"
@@ -28,7 +32,7 @@ resource "aws_instance" "test-instance2" {
   ami = var.aws_ami
   availability_zone = "ap-south-1b"
   instance_type = var.instance_type
-  key_name = "k8s_test"
+  key_name = var.aws_key_name
   subnet_id = aws_subnet.test-public-subnet2.id 
   vpc_security_group_ids = ["${aws_security_group.test-SG.id}"]
   associate_public_ip_address = true
@@ -41,6 +45,10 @@ resource "aws_instance" "test-instance2" {
               sudo apt install -y nginx
               sudo systemctl start nginx
               sudo systemctl enable nginx
+
+              # Create custom index page
+              echo "<h1>Hello from NGINX-2 🚀</h1>" > /usr/share/nginx/html/index.html
+      
               EOF
   root_block_device {
     volume_size = "10"

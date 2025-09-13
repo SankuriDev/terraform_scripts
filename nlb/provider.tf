@@ -132,3 +132,16 @@ resource "aws_lb_listener" "test-nlb-listener1" {
     target_group_arn = aws_lb_target_group.test-tg.arn
   }
 }
+
+# Route53 Alias Record
+resource "aws_route53_record" "nlb_alias" {
+  zone_id = var.hosted_zone_id   # Your hosted zone ID from Route53
+  name    = var.nlb_alias_name  # The domain or subdomain you want
+  type    = "A"
+
+  alias {
+    name                   = aws_lb.test-lb.dns_name
+    zone_id                = aws_lb.test-lb.zone_id
+    evaluate_target_health = false
+  }
+}

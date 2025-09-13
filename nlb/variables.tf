@@ -62,3 +62,19 @@ variable "instance_type" {
   description = "instance_type"
   default = "t2.micro"
 }
+
+variable "hosted_zone_id" {
+  description = "nlb_alias_zone_id"
+  default = "Z02251451C2PJD1E5V8Q7"
+}
+
+variable "nlb_alias_name" {
+  description = "nlb_alias_name"
+  default = "abc.k8sn1.xyz"
+}
+
+variable "aws_key_name" {
+  description = "aws_key_name"
+  default = "k8s_test"
+}
+
